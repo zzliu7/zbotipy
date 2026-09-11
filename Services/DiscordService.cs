@@ -209,6 +209,9 @@ public sealed class DiscordService : IDisposable
         if (a.Contains("eunhyuk", StringComparison.Ordinal))
             return RandomImageKey("eh", MaxDiscordEhImageIndex);
 
+        if (a.Contains("donghae", StringComparison.Ordinal))
+            return RandomImageKey("dh", MaxDiscordEhImageIndex);
+
         return DefaultLargeImageKey;
     }
 
