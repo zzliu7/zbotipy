@@ -25,6 +25,10 @@ LocalMusicPlayer/
   Views/            # MainWindow, LyricsWindow, converters
 ```
 
+## Notice
+
+Seems like I'm backing to China soon and will not have a working Windows computer. The development of this application will stay as what it is right now till I back to the US in August.
+
 ## Contributing
 
 CURSOR & @LiuZhenz701
