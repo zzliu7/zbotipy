@@ -14,25 +14,41 @@
         MinHeight="320"
         MinWidth="480"
         PreviewMouseLeftButtonUp="MainWindow_OnPreviewMouseLeftButtonUp"
+        PreviewKeyDown="MainWindow_OnPreviewKeyDown"
         Closing="MainWindow_OnClosing"
         Background="#FF000000">
     <Window.Resources>
-        <Style x:Key="Mdl2Icon" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Foreground" Value="#FF9CDCFE" />
-            <Setter Property="TextAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
+        <Style x:Key="Mdl2Icon"
+               TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize"
+                    Value="16"/>
+            <Setter Property="Foreground"
+                    Value="#FF9CDCFE"/>
+            <Setter Property="TextAlignment"
+                    Value="Center"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="HorizontalAlignment"
+                    Value="Center"/>
         </Style>
-        <Style x:Key="CircleIconButton" TargetType="Button">
-            <Setter Property="Width" Value="44" />
-            <Setter Property="Height" Value="44" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Background" Value="#FF2D2D30" />
-            <Setter Property="BorderBrush" Value="#FF569CD6" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="Cursor" Value="Hand" />
+        <Style x:Key="CircleIconButton"
+               TargetType="Button">
+            <Setter Property="Width"
+                    Value="44"/>
+            <Setter Property="Height"
+                    Value="44"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="Background"
+                    Value="#FF2D2D30"/>
+            <Setter Property="BorderBrush"
+                    Value="#FF569CD6"/>
+            <Setter Property="BorderThickness"
+                    Value="2"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -44,26 +60,39 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                                              VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Circle" Property="Background" Value="#FF3E3E42" />
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="Circle"
+                                        Property="Background"
+                                        Value="#FF3E3E42"/>
                             </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Circle" Property="Background" Value="#FF505058" />
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="Circle"
+                                        Property="Background"
+                                        Value="#FF505058"/>
                             </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Circle" Property="Opacity" Value="0.45" />
+                            <Trigger Property="IsEnabled"
+                                     Value="False">
+                                <Setter TargetName="Circle"
+                                        Property="Opacity"
+                                        Value="0.45"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="ModeIconButton" TargetType="Button" BasedOn="{StaticResource CircleIconButton}">
-            <Setter Property="Width" Value="40" />
-            <Setter Property="Height" Value="40" />
+        <Style x:Key="ModeIconButton"
+               TargetType="Button"
+               BasedOn="{StaticResource CircleIconButton}">
+            <Setter Property="Width"
+                    Value="40"/>
+            <Setter Property="Height"
+                    Value="40"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -75,17 +104,26 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                                              VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Circle" Property="Background" Value="#FF3E3E42" />
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="Circle"
+                                        Property="Background"
+                                        Value="#FF3E3E42"/>
                             </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Circle" Property="Background" Value="#FF505058" />
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="Circle"
+                                        Property="Background"
+                                        Value="#FF505058"/>
                             </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Circle" Property="Opacity" Value="0.45" />
+                            <Trigger Property="IsEnabled"
+                                     Value="False">
+                                <Setter TargetName="Circle"
+                                        Property="Opacity"
+                                        Value="0.45"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -93,26 +131,37 @@
             </Setter>
         </Style>
         <Style TargetType="ListBox">
-            <Setter Property="Background" Value="#FF000000" />
-            <Setter Property="BorderBrush" Value="#FF3F3F46" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Foreground" Value="#FF9CDCFE" />
+            <Setter Property="Background"
+                    Value="#FF000000"/>
+            <Setter Property="BorderBrush"
+                    Value="#FF3F3F46"/>
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="Foreground"
+                    Value="#FF9CDCFE"/>
         </Style>
         <Style TargetType="Slider">
-            <Setter Property="Foreground" Value="#FF569CD6" />
+            <Setter Property="Foreground"
+                    Value="#FF569CD6"/>
         </Style>
-        <conv:MainLyricFontSizeConverter x:Key="MainLyricFontSizeConverter" />
-        <conv:MainLyricForegroundConverter x:Key="MainLyricForegroundConverter" />
-        <conv:MainLyricFontWeightConverter x:Key="MainLyricFontWeightConverter" />
+        <conv:MainLyricFontSizeConverter x:Key="MainLyricFontSizeConverter"/>
+        <conv:MainLyricForegroundConverter x:Key="MainLyricForegroundConverter"/>
+        <conv:MainLyricFontWeightConverter x:Key="MainLyricFontWeightConverter"/>
         <Style TargetType="ListBoxItem">
-            <Setter Property="Padding" Value="4,3" />
-            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding"
+                    Value="4,3"/>
+            <Setter Property="Background"
+                    Value="Transparent"/>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#1A569CD6" />
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#1A569CD6"/>
                 </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#33007ACC" />
+                <Trigger Property="IsSelected"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#33007ACC"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -121,9 +170,9 @@
           TextElement.FontFamily="{StaticResource CodeEditorFontFamily}"
           TextElement.Foreground="#FF9CDCFE">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Main: playlists + (tracks or lyrics) -->
@@ -131,31 +180,58 @@
               Margin="0,0,0,8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"
-                                  MinWidth="120" />
-                <ColumnDefinition Width="*" />
+                                  MinWidth="120"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0"
-                     ItemsSource="{Binding Playlists}"
-                     SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}"
-                     DisplayMemberPath="Name"
-                     Margin="0,0,8,0"
-                     FontSize="30"
-                     Foreground="#FFCE9178" />
+            <Grid Grid.Column="0"
+                  Margin="0,0,8,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListBox x:Name="PlaylistList"
+                         ItemsSource="{Binding Playlists}"
+                         SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}"
+                         DisplayMemberPath="Name"
+                         FontSize="30"
+                         Foreground="#FFCE9178"
+                         AllowDrop="True"
+                         DragOver="PlaylistList_OnDragOver"
+                         Drop="PlaylistList_OnDrop"/>
+                <Button Grid.Row="1"
+                        Content="Create New Playlist"
+                        Click="CreatePlaylist_OnClick"
+                        Margin="0,8,0,0"
+                        Padding="8,7"
+                        HorizontalContentAlignment="Center"
+                        Foreground="#FFCE9178"
+                        Background="#FF2D2D30"
+                        BorderBrush="#FF569CD6"
+                        Cursor="Hand"/>
+            </Grid>
             <!-- Songs list -->
             <ListBox x:Name="TrackList"
                      Grid.Column="1"
                      ItemsSource="{Binding Tracks}"
                      SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
+                     SelectionMode="Extended"
                      DisplayMemberPath="DisplayName"
                      FontSize="30"
                      Foreground="#FF9CDCFE"
-                     MouseDoubleClick="TrackList_OnMouseDoubleClick">
+                     MouseDoubleClick="TrackList_OnMouseDoubleClick"
+                     PreviewMouseLeftButtonDown="TrackList_OnPreviewMouseLeftButtonDown"
+                     PreviewMouseLeftButtonUp="TrackList_OnPreviewMouseLeftButtonUp"
+                     MouseMove="TrackList_OnMouseMove">
                 <ListBox.Style>
-                    <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
-                        <Setter Property="Visibility" Value="Visible" />
+                    <Style TargetType="ListBox"
+                           BasedOn="{StaticResource {x:Type ListBox}}">
+                        <Setter Property="Visibility"
+                                Value="Visible"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding MainLyricsVisible}" Value="True">
-                                <Setter Property="Visibility" Value="Collapsed" />
+                            <DataTrigger Binding="{Binding MainLyricsVisible}"
+                                         Value="True">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -172,15 +248,20 @@
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          Padding="16,24">
                     <ListBox.Style>
-                        <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
-                            <Setter Property="Visibility" Value="Collapsed" />
+                        <Style TargetType="ListBox"
+                               BasedOn="{StaticResource {x:Type ListBox}}">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed"/>
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding MainLyricsVisible}" Value="True" />
-                                        <Condition Binding="{Binding HasLyricsForCurrentTrack}" Value="True" />
+                                        <Condition Binding="{Binding MainLyricsVisible}"
+                                                   Value="True"/>
+                                        <Condition Binding="{Binding HasLyricsForCurrentTrack}"
+                                                   Value="True"/>
                                     </MultiDataTrigger.Conditions>
-                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="Visibility"
+                                            Value="Visible"/>
                                 </MultiDataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -189,21 +270,24 @@
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsVirtualizing="True"
                                                     VirtualizationMode="Recycling"
-                                                    ScrollUnit="Pixel" />
+                                                    ScrollUnit="Pixel"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            <Setter Property="Padding" Value="8,10" />
-                            <Setter Property="Focusable" Value="False" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Stretch"/>
+                            <Setter Property="Padding"
+                                    Value="8,10"/>
+                            <Setter Property="Focusable"
+                                    Value="False"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListBoxItem">
                                         <Border x:Name="Bd"
                                                 Background="Transparent"
                                                 Padding="{TemplateBinding Padding}">
-                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -219,23 +303,23 @@
                                        TextOptions.TextFormattingMode="Display">
                                 <TextBlock.FontSize>
                                     <MultiBinding Converter="{StaticResource MainLyricFontSizeConverter}">
-                                        <Binding Path="LineIndex" />
+                                        <Binding Path="LineIndex"/>
                                         <Binding Path="DataContext.CurrentLyricLineIndex"
-                                                 RelativeSource="{RelativeSource AncestorType=ListBox}" />
+                                                 RelativeSource="{RelativeSource AncestorType=ListBox}"/>
                                     </MultiBinding>
                                 </TextBlock.FontSize>
                                 <TextBlock.Foreground>
                                     <MultiBinding Converter="{StaticResource MainLyricForegroundConverter}">
-                                        <Binding Path="LineIndex" />
+                                        <Binding Path="LineIndex"/>
                                         <Binding Path="DataContext.CurrentLyricLineIndex"
-                                                 RelativeSource="{RelativeSource AncestorType=ListBox}" />
+                                                 RelativeSource="{RelativeSource AncestorType=ListBox}"/>
                                     </MultiBinding>
                                 </TextBlock.Foreground>
                                 <TextBlock.FontWeight>
                                     <MultiBinding Converter="{StaticResource MainLyricFontWeightConverter}">
-                                        <Binding Path="LineIndex" />
+                                        <Binding Path="LineIndex"/>
                                         <Binding Path="DataContext.CurrentLyricLineIndex"
-                                                 RelativeSource="{RelativeSource AncestorType=ListBox}" />
+                                                 RelativeSource="{RelativeSource AncestorType=ListBox}"/>
                                     </MultiBinding>
                                 </TextBlock.FontWeight>
                             </TextBlock>
@@ -253,15 +337,20 @@
                            Panel.ZIndex="1">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Setter Property="Visibility"
+                                    Value="Collapsed"/>
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding MainLyricsVisible}" Value="True" />
-                                        <Condition Binding="{Binding IsAudioLoaded}" Value="True" />
-                                        <Condition Binding="{Binding HasLyricsForCurrentTrack}" Value="False" />
+                                        <Condition Binding="{Binding MainLyricsVisible}"
+                                                   Value="True"/>
+                                        <Condition Binding="{Binding IsAudioLoaded}"
+                                                   Value="True"/>
+                                        <Condition Binding="{Binding HasLyricsForCurrentTrack}"
+                                                   Value="False"/>
                                     </MultiDataTrigger.Conditions>
-                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="Visibility"
+                                            Value="Visible"/>
                                 </MultiDataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -274,8 +363,8 @@
         <Grid Grid.Row="1"
               Margin="0,0,0,8">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Slider Grid.Column="0"
                     VerticalAlignment="Center"
@@ -284,13 +373,13 @@
                     Value="{Binding ProgressValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     IsMoveToPointEnabled="True"
                     PreviewMouseLeftButtonDown="PlaybackSlider_OnPreviewMouseLeftButtonDown"
-                    Margin="0,0,12,0" />
+                    Margin="0,0,12,0"/>
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
                        Text="{Binding TimeDisplay}"
                        FontFamily="{StaticResource CodeEditorFontFamily}"
                        Foreground="#FFCE9178"
-                       FontSize="13" />
+                       FontSize="13"/>
         </Grid>
 
         <!-- Bottom: left/right clusters; Prev/Play/Next centered on full bar (ignores side buttons) -->
@@ -306,33 +395,39 @@
                         Margin="0,0,8,0">
                     <TextBlock Style="{StaticResource Mdl2Icon}"
                                Text="&#xE838;"
-                               FontSize="17" />
+                               FontSize="17"/>
                 </Button>
                 <Button x:Name="FloatingLyricsButton"
                         Click="FloatingLyrics_OnClick"
                         ToolTip="Floating lyrics window"
                         Margin="0,0,8,0">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource CircleIconButton}">
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource CircleIconButton}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding FloatingLyricsVisible}" Value="True">
-                                    <Setter Property="BorderBrush" Value="#FFCE9178" />
+                                <DataTrigger Binding="{Binding FloatingLyricsVisible}"
+                                             Value="True">
+                                    <Setter Property="BorderBrush"
+                                            Value="#FFCE9178"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <TextBlock Style="{StaticResource Mdl2Icon}"
                                Text="&#xE8A7;"
-                               FontSize="17" />
+                               FontSize="17"/>
                 </Button>
                 <Button Command="{Binding ToggleDiscordPresenceCommand}"
                         Margin="0,0,8,0"
                         ToolTip="Discord rich presence">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource CircleIconButton}">
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource CircleIconButton}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding DiscordRichPresenceEnabled}" Value="True">
-                                    <Setter Property="BorderBrush" Value="#FFCE9178" />
+                                <DataTrigger Binding="{Binding DiscordRichPresenceEnabled}"
+                                             Value="True">
+                                    <Setter Property="BorderBrush"
+                                            Value="#FFCE9178"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -342,17 +437,20 @@
                            Stretch="Uniform"
                            RenderOptions.BitmapScalingMode="HighQuality">
                         <Image.Source>
-                            <BitmapImage UriSource="pack://application:,,,/Discord_Logo.png" />
+                            <BitmapImage UriSource="pack://application:,,,/Discord_Logo.png"/>
                         </Image.Source>
                     </Image>
                 </Button>
                 <Button Command="{Binding ToggleMinimizeToTrayCommand}"
                         ToolTip="Minimize to notification area">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource CircleIconButton}">
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource CircleIconButton}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding MinimizeToTray}" Value="True">
-                                    <Setter Property="BorderBrush" Value="#FFCE9178" />
+                                <DataTrigger Binding="{Binding MinimizeToTray}"
+                                             Value="True">
+                                    <Setter Property="BorderBrush"
+                                            Value="#FFCE9178"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -363,7 +461,7 @@
                                FontWeight="SemiBold"
                                Foreground="#FF9CDCFE"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Center" />
+                               HorizontalAlignment="Center"/>
                 </Button>
             </StackPanel>
 
@@ -374,10 +472,13 @@
                         ToolTip="Normal (stop after last track)"
                         Margin="0,0,6,0">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource ModeIconButton}">
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource ModeIconButton}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CurrentPlaybackMode}" Value="{x:Static models:PlaybackMode.Normal}">
-                                    <Setter Property="BorderBrush" Value="#FFCE9178" />
+                                <DataTrigger Binding="{Binding CurrentPlaybackMode}"
+                                             Value="{x:Static models:PlaybackMode.Normal}">
+                                    <Setter Property="BorderBrush"
+                                            Value="#FFCE9178"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -385,16 +486,19 @@
                     <TextBlock Opacity="{Binding PlaybackModeNormalOpacity}"
                                Style="{StaticResource Mdl2Icon}"
                                Text="&#xE1F2;"
-                               FontSize="15" />
+                               FontSize="15"/>
                 </Button>
                 <Button Command="{Binding SetPlaybackModeRepeatAllCommand}"
                         ToolTip="Repeat all"
                         Margin="0,0,6,0">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource ModeIconButton}">
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource ModeIconButton}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CurrentPlaybackMode}" Value="{x:Static models:PlaybackMode.RepeatAll}">
-                                    <Setter Property="BorderBrush" Value="#FFCE9178" />
+                                <DataTrigger Binding="{Binding CurrentPlaybackMode}"
+                                             Value="{x:Static models:PlaybackMode.RepeatAll}">
+                                    <Setter Property="BorderBrush"
+                                            Value="#FFCE9178"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -402,16 +506,19 @@
                     <TextBlock Opacity="{Binding PlaybackModeRepeatAllOpacity}"
                                Style="{StaticResource Mdl2Icon}"
                                Text="&#xE8EE;"
-                               FontSize="15" />
+                               FontSize="15"/>
                 </Button>
                 <Button Command="{Binding SetPlaybackModeRepeatOneCommand}"
                         ToolTip="Repeat one"
                         Margin="0,0,6,0">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource ModeIconButton}">
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource ModeIconButton}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CurrentPlaybackMode}" Value="{x:Static models:PlaybackMode.RepeatOne}">
-                                    <Setter Property="BorderBrush" Value="#FFCE9178" />
+                                <DataTrigger Binding="{Binding CurrentPlaybackMode}"
+                                             Value="{x:Static models:PlaybackMode.RepeatOne}">
+                                    <Setter Property="BorderBrush"
+                                            Value="#FFCE9178"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -419,16 +526,19 @@
                     <TextBlock Opacity="{Binding PlaybackModeRepeatOneOpacity}"
                                Style="{StaticResource Mdl2Icon}"
                                Text="&#xE8ED;"
-                               FontSize="15" />
+                               FontSize="15"/>
                 </Button>
                 <Button Command="{Binding SetPlaybackModeShuffleCommand}"
                         ToolTip="Shuffle"
                         Margin="0,0,12,0">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource ModeIconButton}">
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource ModeIconButton}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CurrentPlaybackMode}" Value="{x:Static models:PlaybackMode.Shuffle}">
-                                    <Setter Property="BorderBrush" Value="#FFCE9178" />
+                                <DataTrigger Binding="{Binding CurrentPlaybackMode}"
+                                             Value="{x:Static models:PlaybackMode.Shuffle}">
+                                    <Setter Property="BorderBrush"
+                                            Value="#FFCE9178"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -436,22 +546,25 @@
                     <TextBlock Opacity="{Binding PlaybackModeShuffleOpacity}"
                                Style="{StaticResource Mdl2Icon}"
                                Text="&#xE8B1;"
-                               FontSize="15" />
+                               FontSize="15"/>
                 </Button>
                 <Button Command="{Binding ToggleMainLyricsCommand}"
                         ToolTip="Show or hide lyrics in main area">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource CircleIconButton}">
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource CircleIconButton}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding MainLyricsVisible}" Value="True">
-                                    <Setter Property="BorderBrush" Value="#FFCE9178" />
+                                <DataTrigger Binding="{Binding MainLyricsVisible}"
+                                             Value="True">
+                                    <Setter Property="BorderBrush"
+                                            Value="#FFCE9178"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <TextBlock Style="{StaticResource Mdl2Icon}"
                                Text="&#xE8D3;"
-                               FontSize="18" />
+                               FontSize="18"/>
                 </Button>
             </StackPanel>
 
@@ -466,7 +579,7 @@
                         Margin="0,0,10,0">
                     <TextBlock Style="{StaticResource Mdl2Icon}"
                                Text="&#xE100;"
-                               FontSize="18" />
+                               FontSize="18"/>
                 </Button>
                 <Button Style="{StaticResource CircleIconButton}"
                         Command="{Binding PlayPauseCommand}"
@@ -474,14 +587,14 @@
                         Margin="0,0,10,0">
                     <TextBlock Style="{StaticResource Mdl2Icon}"
                                Text="{Binding PlayPauseIconGlyph}"
-                               FontSize="20" />
+                               FontSize="20"/>
                 </Button>
                 <Button Style="{StaticResource CircleIconButton}"
                         Command="{Binding NextCommand}"
                         ToolTip="Next">
                     <TextBlock Style="{StaticResource Mdl2Icon}"
                                Text="&#xE101;"
-                               FontSize="18" />
+                               FontSize="18"/>
                 </Button>
             </StackPanel>
         </Grid>

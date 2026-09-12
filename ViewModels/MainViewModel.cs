@@ -278,7 +278,7 @@ public class MainViewModel : ViewModelBase, IDisposable
         {
             foreach (var sub in subDirs)
             {
-                var playlist = new Playlist { Name = sub.Name };
+                var playlist = new Playlist { Name = sub.Name, DirectoryPath = sub.FullName };
                 foreach (var path in Directory
                              .EnumerateFiles(sub.FullName, "*.mp3", SearchOption.TopDirectoryOnly)
                              .OrderBy(p => p, StringComparer.OrdinalIgnoreCase))
@@ -289,7 +289,7 @@ public class MainViewModel : ViewModelBase, IDisposable
         }
         else
         {
-            var playlist = new Playlist { Name = rootDir.Name };
+            var playlist = new Playlist { Name = rootDir.Name, DirectoryPath = rootDir.FullName };
             foreach (var path in Directory
                          .EnumerateFiles(rootPath, "*.mp3", SearchOption.TopDirectoryOnly)
                          .OrderBy(p => p, StringComparer.OrdinalIgnoreCase))
@@ -299,6 +299,83 @@ public class MainViewModel : ViewModelBase, IDisposable
         }
 
         SelectedPlaylist = Playlists.Count > 0 ? Playlists[0] : null;
+        CommandManager.InvalidateRequerySuggested();
+    }
+
+    public Playlist CreatePlaylist(string? requestedName)
+    {
+        var name = PlaylistLibrary.CreatePlaylist(requestedName);
+        var playlist = new Playlist
+        {
+            Name = name,
+            DirectoryPath = Path.Combine(PlaylistLibrary.RootPath, name)
+        };
+
+        var insertAt = 0;
+        while (insertAt < Playlists.Count &&
+               StringComparer.OrdinalIgnoreCase.Compare(Playlists[insertAt].Name, name) < 0)
+            insertAt++;
+
+        Playlists.Insert(insertAt, playlist);
+        SelectedPlaylist = playlist;
+        return playlist;
+    }
+
+    public void AddTracksToPlaylist(IEnumerable<Track> tracks, Playlist destination)
+    {
+        foreach (var track in tracks.DistinctBy(t => t.FilePath, StringComparer.OrdinalIgnoreCase))
+        {
+            var destinationPath = PlaylistLibrary.AddTrackToPlaylist(track.FilePath, destination.DirectoryPath);
+            if (destinationPath is null || destination.Tracks.Any(t =>
+                    string.Equals(t.FilePath, destinationPath, StringComparison.OrdinalIgnoreCase)))
+                continue;
+
+            destination.Tracks.Add(TrackMetadataReader.Read(destinationPath));
+        }
+    }
+
+    public void DeleteTracks(IEnumerable<Track> tracks)
+    {
+        if (SelectedPlaylist is null)
+            return;
+
+        var tracksToDelete = tracks
+            .Where(SelectedPlaylist.Tracks.Contains)
+            .Distinct()
+            .ToList();
+        if (tracksToDelete.Count == 0)
+            return;
+
+        if (SelectedTrack is not null && tracksToDelete.Contains(SelectedTrack))
+            ResetPlaybackState();
+
+        foreach (var track in tracksToDelete)
+        {
+            PlaylistLibrary.DeleteTrack(track.FilePath);
+            SelectedPlaylist.Tracks.Remove(track);
+        }
+
+        SelectedTrack = null;
+        CommandManager.InvalidateRequerySuggested();
+    }
+
+    public void DeletePlaylist(Playlist playlist)
+    {
+        var index = Playlists.IndexOf(playlist);
+        if (index < 0)
+            return;
+
+        if (ReferenceEquals(SelectedPlaylist, playlist))
+            ResetPlaybackState();
+
+        PlaylistLibrary.DeletePlaylist(playlist.DirectoryPath);
+        Playlists.RemoveAt(index);
+
+        if (Playlists.Count == 0)
+            SelectedPlaylist = null;
+        else
+            SelectedPlaylist = Playlists[Math.Min(index, Playlists.Count - 1)];
+
         CommandManager.InvalidateRequerySuggested();
     }
 

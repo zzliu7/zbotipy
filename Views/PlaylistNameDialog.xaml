@@ -1,0 +1,23 @@
+<Window x:Class="LocalMusicPlayer.Views.PlaylistNameDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Create new playlist"
+        Width="390" Height="180"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="#FF1E1E1E"
+        ShowInTaskbar="False">
+    <Grid Margin="18" TextElement.Foreground="#FF9CDCFE">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Playlist name" FontSize="16" Margin="0,0,0,8" />
+        <TextBox x:Name="PlaylistNameBox" Grid.Row="1" FontSize="16" Padding="6"
+                 Background="#FF2D2D30" Foreground="#FFFFFFFF" BorderBrush="#FF569CD6" />
+        <Button Grid.Row="2" Content="Create" IsDefault="True" Click="Create_OnClick"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="18,7"
+                Background="#FF2D2D30" Foreground="#FFCE9178" BorderBrush="#FF569CD6" />
+    </Grid>
+</Window>

@@ -20,6 +20,9 @@ public partial class MainWindow : Window
     private LyricsWindow? _lyricsWindow;
     private FormsNotifyIcon? _trayIcon;
     private bool _forceClose;
+    private System.Windows.Point _trackDragStart;
+    private ListBoxItem? _selectionToCollapseOnMouseUp;
+    private bool _trackDragStarted;
 
     public MainWindow()
     {
@@ -107,6 +110,129 @@ public partial class MainWindow : Window
     {
         if (sender is System.Windows.Controls.ListBox listBox && listBox.SelectedItem is Track track)
             _viewModel.LoadAndPlayTrack(track);
+    }
+
+    private void CreatePlaylist_OnClick(object sender, RoutedEventArgs e)
+    {
+        var dialog = new PlaylistNameDialog { Owner = this };
+        if (dialog.ShowDialog() == true)
+            PlaylistList.ScrollIntoView(_viewModel.CreatePlaylist(dialog.PlaylistName));
+    }
+
+    private void TrackList_OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        _trackDragStart = e.GetPosition(TrackList);
+        _trackDragStarted = false;
+        _selectionToCollapseOnMouseUp = null;
+
+        var item = FindAncestor<ListBoxItem>(e.OriginalSource as DependencyObject);
+
+        if (Keyboard.IsKeyDown(Key.Enter))
+        {
+            if (item is null)
+                return;
+
+            item.IsSelected = !item.IsSelected;
+            item.Focus();
+            e.Handled = true;
+            return;
+        }
+
+        // Like File Explorer, starting a drag on one of several selected items keeps the group selected.
+        if (item is { IsSelected: true } && TrackList.SelectedItems.Count > 1 &&
+            Keyboard.Modifiers == ModifierKeys.None)
+        {
+            _selectionToCollapseOnMouseUp = item;
+            item.Focus();
+            e.Handled = true;
+        }
+    }
+
+    private void TrackList_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (_selectionToCollapseOnMouseUp is { } item && !_trackDragStarted)
+        {
+            TrackList.SelectedItems.Clear();
+            item.IsSelected = true;
+        }
+
+        _selectionToCollapseOnMouseUp = null;
+    }
+
+    private void TrackList_OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        if (e.LeftButton != MouseButtonState.Pressed || TrackList.SelectedItems.Count == 0)
+            return;
+
+        var current = e.GetPosition(TrackList);
+        if (Math.Abs(current.X - _trackDragStart.X) < SystemParameters.MinimumHorizontalDragDistance &&
+            Math.Abs(current.Y - _trackDragStart.Y) < SystemParameters.MinimumVerticalDragDistance)
+            return;
+
+        var tracks = TrackList.SelectedItems.Cast<Track>().ToList();
+        _trackDragStarted = true;
+        System.Windows.DragDrop.DoDragDrop(
+            TrackList,
+            new System.Windows.DataObject(typeof(List<Track>), tracks),
+            System.Windows.DragDropEffects.Copy);
+        _selectionToCollapseOnMouseUp = null;
+    }
+
+    private void PlaylistList_OnDragOver(object sender, System.Windows.DragEventArgs e)
+    {
+        e.Effects = e.Data.GetDataPresent(typeof(List<Track>)) &&
+                    FindAncestor<ListBoxItem>(e.OriginalSource as DependencyObject) is not null
+            ? System.Windows.DragDropEffects.Copy
+            : System.Windows.DragDropEffects.None;
+        e.Handled = true;
+    }
+
+    private void PlaylistList_OnDrop(object sender, System.Windows.DragEventArgs e)
+    {
+        if (e.Data.GetData(typeof(List<Track>)) is not List<Track> tracks ||
+            FindAncestor<ListBoxItem>(e.OriginalSource as DependencyObject)?.DataContext is not Playlist playlist)
+            return;
+
+        _viewModel.AddTracksToPlaylist(tracks, playlist);
+        e.Handled = true;
+    }
+
+    private void MainWindow_OnPreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key != Key.Delete)
+            return;
+
+        if (PlaylistList.IsKeyboardFocusWithin && PlaylistList.SelectedItem is Playlist playlist)
+        {
+            var playlistDialog = new DeletePlaylistDialog { Owner = this };
+            if (playlistDialog.ShowDialog() == true)
+                _viewModel.DeletePlaylist(playlist);
+
+            e.Handled = true;
+            return;
+        }
+
+        if (TrackList.SelectedItems.Count == 0 || !TrackList.IsKeyboardFocusWithin)
+            return;
+
+        var tracks = TrackList.SelectedItems.Cast<Track>().ToList();
+        var dialog = new DeleteSongsDialog(tracks.Count) { Owner = this };
+        if (dialog.ShowDialog() == true)
+            _viewModel.DeleteTracks(tracks);
+
+        e.Handled = true;
+    }
+
+    private static T? FindAncestor<T>(DependencyObject? current) where T : DependencyObject
+    {
+        while (current is not null)
+        {
+            if (current is T match)
+                return match;
+            current = VisualTreeHelper.GetParent(current);
+        }
+
+        return null;
     }
 
     private void PlaybackSlider_OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
